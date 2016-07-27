@@ -1,0 +1,19 @@
+{% assign collection_index__product = forloop.index %}
+{% assign remaining_length__product = collection_product_count__product | minus: collection_index__product %}
+
+{% if collection_product_count__product == 1 %}
+  {% comment %} Set full width when there is 1 product in a collection by making
+  `grid_item_width` an empty string {% endcomment %}
+  {% assign grid_item_width = '' %}
+  {% include 'product-grid-item' %}
+  {% break %}
+{% else %}
+  {% comment %} Set item with to half if it isn't in a 3 row. {% endcomment %}
+  {% assign grid_item_width = 'one-whole medium--one-half large--one-third' %}
+  {% include 'product-grid-item' %}
+
+  {% comment %} We still need to increment the three_row_index_product {% endcomment %}
+  {% if three_row_index__product <= 2 %}
+    {% assign three_row_index__product = three_row_index__product | plus: 1 %}
+  {% endif %}
+{% endif %}

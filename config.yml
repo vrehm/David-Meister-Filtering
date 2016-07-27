@@ -1,0 +1,5 @@
+development:
+  password: 059fcd6863f24e0cebfe01ade53ed272
+  store: david-meister-sandbox.myshopify.com
+  bucket_size: 40
+  refill_rate: 2

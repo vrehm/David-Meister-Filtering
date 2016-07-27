@@ -1,0 +1,40 @@
+{% comment %}
+REUBEN // Replaced the default index.liquid with a collection one so that we can have pagination
+
+
+{% assign collection = collections.all-dresses %}
+{% paginate collection.products by 9 %}
+
+<div class="grid grid-collage dm-grid">
+{% for product in collection.products %}
+{% include 'product-grid' %}
+{% endfor %}
+</div>
+
+{% if paginate.pages > 1 %}
+<div class="pagination">
+{{ paginate | default_pagination | replace: '&laquo; Previous', '&larr;' | replace: 'Next &raquo;', '&rarr;' }}
+</div>
+{% endif %}
+
+{% endpaginate %}
+{% endcomment %}
+
+<div class="grid grid-collage dm-grid">
+{% assign collection = collections.all-dresses %}
+{% paginate collection.products by 9 %}
+	<div class="collection-matrix">
+
+		{% for product in collection.products %}
+		<div class="grid__item dm_grid__item large--one-third medium--one-half" id="product-{{ forloop.index | plus:paginate.current_offset }}">
+			{% include 'product-grid-item' with product %}
+		</div> 
+		{% endfor %}
+		{% if paginate.next %}
+			<div class="more dm-more"><a href="{{ paginate.next.url }}">More</a></div>
+		{% endif %}
+
+	</div>
+	<div id="product-list-foot"></div>
+{% endpaginate %}
+</div>
