@@ -84,11 +84,21 @@
       `is_reverse_row__product`, `three_row_index__product`, `collection_product_count`, and `divisible_by_three__product` are
       all used by 'snippets/product-grid-collage.liquid'
     {% endcomment %}
+      
+
+
+
+    {% comment %} if the url contains a number from 1..10 {% endcomment %}
+      {% comment %} get the numbers index of {% endcomment %}
+      {% comment %} splice the array and return the number {% endcomment %}
+
+
     {% assign is_reverse_row__product = false %}
     {% assign three_row_index__product = 0 %}
     {% assign collection_product_count__product = collection.products_count %}
     {% assign divisible_by_three__product = collection_product_count__product | modulo:3 %}
     {% for product in collection.products %}
+    
       <div class="grid__item dm_grid__item large--one-third medium--one-half" id="product-{{ forloop.index | plus:paginate.current_offset }}">
         {% include 'product-grid-item' with product %}
       </div> 
