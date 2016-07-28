@@ -3141,15 +3141,18 @@ button.mfp-arrow {
   .dm_grid__image {
     position: relative;
     ul {
+      position: relative;
       list-style-type: none;
       li:nth-of-type(2) {
         position: absolute; top: 0;
         visibility: hidden;
         opacity: 0;
         transition: visibility 0s linear 0.35s, opacity 0.35s linear;
+        width: 100%;
+        height: 100%;
       }
     }
-    /*&:hover ul {
+    &:hover ul {
       li:nth-of-type(1) {
         visibility: hidden;
         opacity: 0;
@@ -3160,7 +3163,7 @@ button.mfp-arrow {
         opacity: 1;
         transition-delay: 0s;
       }
-    }*/
+    }
   }
   p {
     font-family: $headerFontStack;

@@ -44,10 +44,11 @@
     - http://docs.shopify.com/support/your-store/collections/how-to-navigate-within-a-collection
 
 {% endcomment %}
+<!-- product -->
 <a href="{{ product.url | within: collection }}" class="grid__image dm_grid__image">
   <ul>
     <li><img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}"></li>
-    <li><img src="{{ product.images[1] | product_img_url: 'large' }}" alt="{{ product.title | escape  }}" /></li>
+    <li><img src="{{ product.images[2].src | img_url: 'large' }}" alt="{{ product.title | escape  }}" /></li>
   </ul>
 </a>
 
