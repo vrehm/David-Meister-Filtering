@@ -1,0 +1,5 @@
+{% assign sizes = total_sizes | split: " " %}
+
+{% for size in sizes %}
+<li class="size-filter" data-size="{{ size }}" > <span> {{ size }}  </span> </li>
+{% endfor %}

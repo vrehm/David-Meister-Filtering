@@ -344,7 +344,13 @@
     </div>
 
     <main class="main-content" role="main">
+      {% comment %} include size color vendor data {% endcomment %}
+      
+
       <div class="wrapper">
+        
+        {% include "left-aside-filter" %}
+        
         <ul class="dm-collections-nav">
           {% for link in linklists.collections-menu.links %}
             <li class="{% if link.active %}current{% endif %}"><a href="{{ link.url }}">{{ link.title }}</a></li>

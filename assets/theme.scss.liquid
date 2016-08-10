@@ -2460,6 +2460,116 @@ $slick-opacity-not-active: 0.25;
   }
 }
 
+/*================ Left Aside Filter =================*/
+.left-aside{
+    
+
+  @media(min-width: 1401px) {  
+    display: block; 
+    max-width: 200px;
+    width: 100%;
+    min-height: 700px;
+    margin-left: -200px;
+    position: absolute; 
+  }
+
+  @media(max-width: 1400px) { display: none}
+  
+  ul{
+    list-style: none;
+
+    &.color-filter{
+      float: left;
+      padding-top: 24px;
+      display: block;
+      width: auto;
+      height: auto;
+      margin-bottom: 24px;
+    }
+
+    &.size-filter{
+      padding-top: 24px;
+    }
+
+    &.size-filter:after{
+      clear: both;
+      display: block;
+      width: 100%;
+      content: " ";
+      margin-bottom: 24px;
+    }
+   
+    li.color-filter, li.size-filter{
+      float: left;
+    }
+
+
+    li.color-filter{
+      width: 50%;
+      margin-top: 5px;
+      span{
+        border: solid #000000 1px;
+        width: 75px;
+        text-align: center;
+        display: block
+      }
+      &.active{
+        span{
+          color: white;
+          background-color: #000000;
+        }
+        &:hover{
+          span{
+            background-color: #000000;
+          }
+        }
+      }
+      &:hover{
+        span{
+          background-color: #a0a0a0;
+          color: white;
+        }
+      }
+    }
+
+    li.size-filter{
+      width: 50px;
+      span{
+        display: block;
+        width: 25px;
+        height: 25px;
+        border: 1px solid #000000;
+        text-align: center;
+      } 
+      &.active{
+        span{
+          color: white;
+          background-color: #000000;
+        }
+        &:hover{
+          span{
+            background-color: #000000;
+          }
+        }
+      }
+      &:hover{
+        span{
+          background-color: #a0a0a0;
+          color: white;
+        }
+      }
+    }
+  }
+  
+  h2{
+    font-size: 14px;
+  }
+
+  .btn{
+    margin-left: 20px;
+  }
+}
+
 /*================ Dropdown Animation ================*/
 .site-nav__dropdown {
   display: block;

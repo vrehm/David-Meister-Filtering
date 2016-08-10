@@ -1,0 +1,47 @@
+{% assign total_sizes = '' %}
+{% assign total_colors = '' %}
+{% assign total_vendors = '' %}
+
+{% for prod in coll.products %}
+  
+  {% if product.vendor > 0 %}
+    "its true"
+  {% endif %}
+  {% for vend in prod.vendor %}
+    {% unless total_vendors contains vend %}
+      {% capture total_vendors %}{{ total_vendors | append: vend | append: ',' }}{% endcapture %}
+    {% endunless %}
+  {% endfor %}
+
+  {% for variant in prod.variants %}
+    {% if prod.options[0] == 'Size' %}
+      {% unless total_sizes contains variant.option1 %}
+        {% capture total_sizes %}{{ total_sizes | append: variant.option1 | append: ' '  }}{% endcapture %}
+      {% endunless %}
+    {% endif %}
+    
+    {% if prod.options[1] == 'Color' %}
+      {% if variant.option2 contains '/' %}
+        {% comment %} split the colors at the / also stript it of any white space </s>{% endcomment %}
+        {% assign split_colors = variant.option2 | split: '/' %}
+        {% for split_color in split_colors %}
+              
+            {% comment %} strip split color of spaces and assign new variable{% endcomment %}
+            {% assign stripped_split_color = split_color | strip %}
+            
+            {% unless total_colors contains stripped_split_color %}
+              {% capture total_colors %}{{ total_colors | append: stripped_split_color  | append: " " }}{% endcapture %}
+            {% endunless %}
+
+        {% endfor %}
+
+      {% else %}
+        {% unless total_colors contains variant.option2 %}
+          {% assign stripped_split_color = variant.option2 %}
+          {% capture total_colors %}{{ total_colors | append: stripped_split_color | append: " " }}{% endcapture %}
+        {% endunless %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+
+{% endfor %}
