@@ -3,13 +3,19 @@
     {% comment %} TODO make sure it finds parent collection and keeps option within that colleciton {% endcomment %}
     
     
-    {% assign coll = collection %}
     {% assign family = collection.metafields.global %}
     
     {% if family['parent'] %}
       {% assign var = family['parent'] %}
-      {% assign coll = collections[var] %}
+    {% elsif collection.title contains "Products" %}
+      {% assign var = "All-Dresses" %}
+    {% else %}
+      {% assign var = collection.title %}  
     {% endif %}
+
+   
+  
+    {% assign coll = collections[var] %}
 
     {% include 'sizes-colors-vendors' coll: coll %}
     <ul class="left-aside-filters">
@@ -56,7 +62,7 @@
     $('.left-aside button').on('click', function(){
       var color = $('li.color-filter.active').data('color');
       var size = $('li.size-filter.active').data('size');
-      var collection = "{{ collection.title }}";
+      var collection = "{{ var }}";
 
       {% if family['parent'] %}
         collection = "{{ family['parent'] }}";
