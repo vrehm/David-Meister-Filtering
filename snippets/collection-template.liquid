@@ -2,10 +2,10 @@
   Collection template, used on collection.liquid and collection.image.liquid
 {% endcomment %}
 
-{% paginate collection.products by 12 %}
+{% paginate collection.products by 11 %}
 
 <header class="section-header text-center dm-collection-header">
-  <h1>{{ collection.title }}</h1>
+  
   <!--<hr class="hr--small">-->
   {% if collection.description != blank %}
     <div class="grid">
@@ -91,7 +91,9 @@
     {% comment %} if the url contains a number from 1..10 {% endcomment %}
       {% comment %} get the numbers index of {% endcomment %}
       {% comment %} splice the array and return the number {% endcomment %}
-
+    <div class="grid__item dm_grid__item large--one-third medium--one-half small--one-whole">
+        {% include "left-aside-filter" %}
+    </div>
 
     {% assign is_reverse_row__product = false %}
     {% assign three_row_index__product = 0 %}
@@ -102,6 +104,7 @@
       <div class="grid__item dm_grid__item large--one-third medium--one-half" id="product-{{ forloop.index | plus:paginate.current_offset }}">
         {% include 'product-grid-item' with product %}
       </div> 
+
     {% else %}
 
       {% if collection.handle == 'all' %}

@@ -2459,24 +2459,42 @@ $slick-opacity-not-active: 0.25;
     }
   }
 }
+/*================ Extra Query for aside ==============*/
+.x-large--disapear{
+  @media(min-width: 1281px) { display: none;}  
+  @media(max-width: 1280px) { display: visible;}
+}
+
+.x-large--show{
+  @media(min-width: 1281px) { display: visible;}  
+  @media(max-width: 1280px) { display: none;}
+}
+
+.x-large--one-third{
+  @media(min-width: 1281px) { width: 33.33% } 
+}
+
+.x-large--one-whole{
+  @media(min-width: 1281px) { width: 100% } 
+}
+
 
 /*================ Left Aside Filter =================*/
+
+
+
 .left-aside{
-    
+  margin: 0 auto;
+  position: static;
+  display: block; 
+  max-width: 200px;
+  width: 100%;
+  height: auto; 
 
-  @media(min-width: 1401px) {  
-    display: block; 
-    max-width: 200px;
-    width: 100%;
-    min-height: 700px;
-    margin-left: -200px;
-    position: absolute; 
-  }
-
-  @media(max-width: 1400px) { display: none}
   
   ul{
     list-style: none;
+    margin-left: 0px;
 
     &.color-filter{
       float: left;
@@ -2565,9 +2583,6 @@ $slick-opacity-not-active: 0.25;
     font-size: 14px;
   }
 
-  .btn{
-    margin-left: 20px;
-  }
 }
 
 /*================ Dropdown Animation ================*/
@@ -3115,7 +3130,7 @@ button.mfp-arrow {
     &:hover,
     &:focus {
       @include transform(scale(1.03));
-
+      
       &:after {
         opacity: 0.5;
       }
@@ -3196,6 +3211,10 @@ button.mfp-arrow {
   color: #666;
 }
 
+.dm-collection-title{
+  text-align: center;
+}
+
 .site-nav__link {
   padding: 15px 7px;
 }
@@ -3255,7 +3274,19 @@ button.mfp-arrow {
 
 .dm_grid__item {
   padding-bottom: 100px;
-  &:nth-child(3n+1) { clear: left!important; }
+  
+  @media(min-width: 771px){ 
+    &:nth-child(3n+1) { 
+      clear: left!important; 
+    }
+  } 
+
+  @media(max-width: 770px){ 
+    &:nth-child(2n+1) { 
+      clear: left!important; 
+    }
+  } 
+ 
   .dm_grid__image {
     position: relative;
     ul {
@@ -3270,7 +3301,13 @@ button.mfp-arrow {
         height: 100%;
       }
     }
+
     &:hover ul {
+      li.no-hover {
+        visibility: visible !important;
+        opacity: 1 !important;
+        transition: none !important;
+      }
       li:nth-of-type(1) {
         visibility: hidden;
         opacity: 0;
@@ -3283,6 +3320,7 @@ button.mfp-arrow {
       }
     }
   }
+
   p {
     font-family: $headerFontStack;
     font-size: floor($headerBaseFontSize * 0.65);

@@ -335,7 +335,7 @@
 
           {% comment %}
           <div class="grid--full large--right medium-down--hide ">
-            {% include 'search-bar', search_btn_style: 'btn', search_bar_location: 'search-bar--header' %}
+            {% include 'search-bar', search_btn_style: 'btn', search_bar_lo2cation: 'search-bar--header' %}
           </div>
           {% endcomment %}
 
@@ -348,15 +348,26 @@
       
 
       <div class="wrapper">
-        
-        {% include "left-aside-filter" %}
-        
         <ul class="dm-collections-nav">
           {% for link in linklists.collections-menu.links %}
             <li class="{% if link.active %}current{% endif %}"><a href="{{ link.url }}">{{ link.title }}</a></li>
           {% endfor %}
         </ul>
-        {{ content_for_layout }}
+
+        {% if template contains "collection" or template contains "index" %}
+
+          <div class="grid">
+            <div class="grid__item one-whole"><h1 class="dm-collection-title">{{ collection.title }}</h1></div>
+
+            <div class="grid__item one-whole">
+              {{ content_for_layout }}
+            </div>
+          </div>
+
+        {% else %}
+          {{ content_for_layout }}
+        {% endif %}
+
       </div>
     </main>
 

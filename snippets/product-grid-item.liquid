@@ -47,13 +47,26 @@
 <!-- product -->
 <a href="{{ product.url | within: collection }}" class="grid__image dm_grid__image">
   <ul>
-    <li><img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}"></li>
-    <li><img src="{{ product.images[2].src | img_url: 'large' }}" alt="{{ product.title | escape  }}" /></li>
+    {% if product.images[2] == blank and product.images[1] != blank or product.images[2].src contains 'no-image'   %}
+      {% unless product.images[1].src contains 'no-image' %}
+        <li><img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}"></li>
+        <li><img src="{{ product.images[1].src | img_url: 'large' }}" alt="{{ product.title | escape  }}" /></li>
+      {% else %}
+        <li class="no-hover"><img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}"></li>
+      {% endunless %}
+    {% elsif product.images[2] != blank %}
+      <li><img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}"></li>
+      <li><img src="{{ product.images[2].src | img_url: 'large' }}" alt="{{ product.title | escape  }}" /></li>      
+    {% else %}
+      <li class="no-hover"><img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}"></li>
+    {% endif %}
   </ul>
 </a>
 
 <p>
-  <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
+  <a href="{{ product.url | within: collection }}">
+    {{ product.title }}
+  </a>
 </p>
 <p class="price">
   {% comment %}
