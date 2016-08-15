@@ -5,16 +5,14 @@
     
     {% assign family = collection.metafields.global %}
     
+     {% assign var = collection.title %}
+
     {% if family['parent'] %}
       {% assign var = family['parent'] %}
     {% elsif collection.title contains "Products" %}
-      {% assign var = "All-Dresses" %}
-    {% else %}
-      {% assign var = collection.title %}  
+      {% assign var = "All-Dresses" %}  
     {% endif %}
 
-   
-  
     {% assign coll = collections[var] %}
 
     {% include 'sizes-colors-vendors' coll: coll %}
@@ -35,56 +33,22 @@
       </li>
     </ul>
     <button class="btn"> Search </button>
-    
 </div>
 
 
+
 <script type="text/javascript">
+
+    // expose liquid data to variablse
     
-    $('li.size-filter').on('click', function(){
-      var $this = $(this);  
-      if($this.hasClass('active')){
-        $this.removeClass('active') && $('li.size-filter').removeClass('active');
-      }else{
-        $('li.size-filter').removeClass('active') && $(this).addClass('active');
-      }
+    var color = "{{ current_color }}";
+    var parent = "{{ var }}";
+    var title = "{{ collection.title }}";
+
+    $(document).ready(function(){
+      theme.variables.currentColor = color;
+      theme.variables.curCollectionTitle = title;
+      theme.variables.parentCollection = parent;
     })
-
-    $('li.color-filter').on('click', function(){
-      var $this = $(this);  
-      if($this.hasClass('active')){
-        $this.removeClass('active') && $('li.color-filter').removeClass('active');
-      }else{
-        $('li.color-filter').removeClass('active') && $(this).addClass('active');
-      }
-    })
-
-    $('.left-aside button').on('click', function(){
-      var color = $('li.color-filter.active').data('color');
-      var size = $('li.size-filter.active').data('size');
-      var collection = "{{ var }}";
-
-      {% if family['parent'] %}
-        collection = "{{ family['parent'] }}";
-      {% endif %}
-
-      if(color && size){
-        url = "/collections/"+collection+"-"+color+"-"+size;
-      }else if(color && !size){
-        url = "/collections/"+collection+"-"+color;
-      }else if(!color && size){
-        url = "/collections/"+collection+"-"+size;
-      }else{
-        url = window.location.pathname;
-      }
-
-      window.location.pathname = url.toLowerCase();
-
-      // get the current active filters and string together a url
-    })
-
-
-
-
 
 </script>

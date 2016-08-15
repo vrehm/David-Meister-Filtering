@@ -34,6 +34,12 @@ theme.variables = {
   productPageLoad     : false,
   productPageSticky   : true,
 
+  // Size, Color, Colleciton for filter
+  currentSize         : '', 
+  currentColor        : '',
+  parentCollection    : '',
+  curCollectionTitle  : '',
+
   // Breakpoints from src/stylesheets/global/variables.scss.liquid
   mediaQuerySmall     : 'screen and (max-width: 590px)',
   mediaQueryMedium    : 'screen and (min-width: 591px) and (max-width: 768px)',
@@ -68,7 +74,9 @@ theme.initCache = function () {
 
     $productSingleMeta      : $('.product-single__meta'),
     $productReturnLink      : $('.return-link'),
-    $productSelectors       : $('.radio-wrapper')
+    $productSelectors       : $('.radio-wrapper'),
+
+    $leftAside             : $('.left-aside')
   };
 };
 
@@ -84,6 +92,7 @@ theme.init = function () {
   theme.hideSingleSelectors();
   theme.styleTextLinks();
   theme.searchModal();
+  theme.leftAsideFilter();
 
   {% if settings.product_zoom_enable %}
     theme.productImageZoom();
@@ -196,6 +205,93 @@ theme.resizeLogo = function () {
       $el.removeAttr('style');
     }
   });
+};
+
+theme.leftAsideFilter = function() {
+
+  if (!theme.cache.$leftAside.length) {
+    return;
+  };
+
+  var collectionTitle = theme.variables.curCollectionTitle,
+      $sizeUl = $('ul.size-filter'),
+      $colorUl = $('ul.color-filter'),
+      $colorFilter = $sizeUl.find('.size-filter'),
+      $sizeFilter = $colorUl.find('.color-filter'),
+      currentColor,
+      currentSize,
+      parentCollection;
+
+  // Set the current page and color
+  // determine if there is - at the last two characters of the colleciton title
+  var x = collectionTitle.length;
+
+  // set the current active size
+  if(collectionTitle[x - 3] === "-"){
+    currentSize = collectionTitle.slice(-2);
+  }else if(collectionTitle[x - 2] === "-"){
+    currentSize = collectionTitle[x - 1];
+  }else{
+    currentSize = 0;
+  }
+  // set the current color from liquid refer to left-aside-filter.liquid
+  currentColor = theme.variables.currentColor;
+  //if currentSize collor is not 0
+  if(currentSize > 0){
+    $sizeUl.find("[data-size='"+currentSize+"']").addClass('active');
+  }
+  //if currentCollor is not none
+  if(currentColor != 'none'){// set the filter with the current color to active
+   $colorUl.find("[data-color='"+currentColor+"']").addClass('active');
+  }
+  theme.activateFilter($colorFilter);
+  theme.activateFilter($sizeFilter);
+
+  theme.cache.$leftAside.find('button').on('click', function(){
+    theme.filterSearch(theme.variables.parentCollection);
+  })
+};
+
+theme.activateFilter = function ($el) {
+
+  $el.on('click', function(){
+    $this = $(this);  
+    if($this.hasClass('active')){
+      // todo set active filters
+      $this.removeClass('active') && $el.removeClass('active');
+      if ($this.data('color')){
+        theme.variables.currentColor = '';
+      }else if($this.data('size')){
+        theme.variables.currentSize = '';
+      }
+    }else{
+      $el.removeClass('active') && $(this).addClass('active');
+      if ($this.data('color')){
+        theme.variables.currentColor = $this.data('color');
+      }else if($this.data('size')){
+        theme.variables.currentSize = $this.data('size');
+      }
+    }
+  });
+};
+
+theme.filterSearch = function (collection) {
+  // var color = $('li.color-filter.active').data('color');
+  // var size = $('li.size-filter.active').data('size');
+  
+  var color = theme.variables.currentColor;
+  var size = theme.variables.currentSize;
+
+  if(color && size){
+    url = "/collections/"+collection+"-"+color+"-"+size;
+  }else if(color && !size){
+    url = "/collections/"+collection+"-"+color;
+  }else if(!color && size){
+    url = "/collections/"+collection+"-"+size;
+  }else{
+    url = window.location.pathname;
+  }
+  window.location.pathname = url.toLowerCase();
 };
 
 theme.sizeCartDrawerFooter = function () {

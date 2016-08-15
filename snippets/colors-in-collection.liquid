@@ -1,5 +1,13 @@
 {% assign colors = total_colors | split: " " %}
+{% assign current_color = 'none' %}
+
 
 {% for color in colors %}
-<li class="color-filter" data-color="{{ color }}"><span>{{color}}</span></li>
+
+	{% if collection.title contains color %}
+		{% assign current_color = color %}
+	{% endif %}
+
+	<li class="color-filter" data-color="{{ color }}"><span>{{color}}</span></li>
+	
 {% endfor %}
