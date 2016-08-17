@@ -2481,7 +2481,44 @@ $slick-opacity-not-active: 0.25;
 
 /*================ Left Aside Filter =================*/
 
+.small-js-hidden{
+   @media(max-width: 400px) {  display: none; } 
+}
 
+.js-filter-toggle{
+  display: block;
+  max-width: 100px;
+  border: solid #989898 1px;
+  margin-top: 9px;
+  float: left;
+  cursor: pointer;
+}
+
+h1.dm-collection-title{
+  @media(max-width: 400px){
+    font-size: 20px !important;
+    margin-top: 9px;
+  }
+}
+
+.filter-wrapper{
+  padding: 0px !important;
+}
+
+.menu-arrow{
+  width: auto;
+  float: right;
+  margin-right: 20px;
+  display: none;
+  &.rotate{
+    transform: rotate(90deg);
+  }
+  @media(max-width: 320px) {  
+    float: left; 
+    margin-right: 0px;
+  }
+  @media(max-width: 590px) {  display: block; }
+}
 
 .left-aside{
   margin: 0 auto;
@@ -2490,7 +2527,11 @@ $slick-opacity-not-active: 0.25;
   max-width: 200px;
   width: 100%;
   height: auto; 
+  overflow: hidden;
 
+  .btn{
+    @media(max-width: 400px) {  width: 100%; }
+  }
   
   ul{
     list-style: none;
@@ -2519,33 +2560,90 @@ $slick-opacity-not-active: 0.25;
    
     li.color-filter, li.size-filter{
       float: left;
+      cursor: pointer;
     }
 
-
     li.color-filter{
-      width: 50%;
+      width: 25%;      
+      height: 25px;
       margin-top: 5px;
-      span{
-        border: solid #000000 1px;
-        width: 75px;
-        text-align: center;
-        display: block
+
+      .circle{
+        position: relative;
+        overflow: hidden;
+        display: block;
+        width: 25px;
+        height: 25px;
+        border-radius: 25px;
+        border: solid #989898 1px;
       }
+      
+      .cross{
+        transform: rotate(45deg);
+        right: -6.75px;
+        top: 0;
+        width: 75px;
+        height: 40px;
+        position: absolute;
+      }
+      
       &.active{
-        span{
-          color: white;
-          background-color: #000000;
+        .cross{
+          border: solid #989898 1px;
+        } 
+      }
+
+      &[data-color="White"]{
+        .circle{
+          $base-color: #FFFFFF;
+          background-color: $base-color;
         }
-        &:hover{
-          span{
-            background-color: #000000;
-          }
+      }
+      &[data-color="Black"]{
+        .circle{
+          $base-color: #000000; 
+          background-color: $base-color;
+        }
+      }
+      &[data-color="Red"]{
+        .circle{
+          $base-color: #EF8F8F; 
+          background-color: $base-color;
+        }
+      }
+      &[data-color="Blue"]{
+        .circle{
+          $base-color: #76A7E1; 
+          background-color: $base-color;
+        }
+      }
+      &[data-color="Green"]{
+        .circle{
+          $base-color: #92F49C; 
+          background-color: $base-color;
+        }
+      }
+      &[data-color="Beige"]{
+        .circle{
+          $base-color: #EFE6C2; 
+          background-color: $base-color;
+        }
+      }
+      &[data-color="Gold"]{
+        .circle{
+          $base-color: #FFDA50; 
+          background-color: $base-color;
+        }
+      }
+      &[data-color="Silver"]{
+        .circle{
+          $base-color: #CDCDCD; 
+          background-color: $base-color;
         }
       }
       &:hover{
-        span{
-          background-color: #a0a0a0;
-          color: white;
+        .circle{
+          border: solid transparent 1px;
         }
       }
     }
@@ -3213,6 +3311,10 @@ button.mfp-arrow {
 
 .dm-collection-title{
   text-align: center;
+  @media (max-width: 420px){
+    font-size: 20px !important;
+    margin-top: 9px;
+  }
 }
 
 .site-nav__link {

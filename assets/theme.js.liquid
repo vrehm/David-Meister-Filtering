@@ -218,6 +218,8 @@ theme.leftAsideFilter = function() {
       $colorUl = $('ul.color-filter'),
       $colorFilter = $sizeUl.find('.size-filter'),
       $sizeFilter = $colorUl.find('.color-filter'),
+      arrow = $('.menu-arrow'),
+      list =  $('.left-aside-filters'),
       currentColor,
       currentSize,
       parentCollection;
@@ -244,6 +246,41 @@ theme.leftAsideFilter = function() {
   if(currentColor != 'none'){// set the filter with the current color to active
    $colorUl.find("[data-color='"+currentColor+"']").addClass('active');
   }
+
+
+  function openFilter(){
+    if(list.hasClass('small-js-hidden')){
+      arrow.addClass('rotate');
+      list.fadeIn( 500, function(){
+        list.removeClass('small-js-hidden');
+      });
+    }else{
+      list.fadeOut( 500, function(){
+        arrow.removeClass('rotate');
+        list.addClass('small-js-hidden');
+      });
+    }
+  }
+
+  $(window).on('resize', function(){
+
+    if($(window).width() > 590 ){
+      list.fadeIn( 500, function(){
+        list.removeClass('small-js-hidden');
+        arrow.removeClass('rotate');
+      });
+    }else{
+      list.fadeOut( 500, function(){
+        list.addClass('small-js-hidden');
+      });
+
+      $('.js-filter-toggle').on('click', function(){ 
+        openFilter(list, arrow);
+      });
+    } 
+  }).resize();
+
+  // activate all the filters
   theme.activateFilter($colorFilter);
   theme.activateFilter($sizeFilter);
 
@@ -260,6 +297,7 @@ theme.activateFilter = function ($el) {
       // todo set active filters
       $this.removeClass('active') && $el.removeClass('active');
       if ($this.data('color')){
+        // reset color filter value
         theme.variables.currentColor = '';
       }else if($this.data('size')){
         theme.variables.currentSize = '';
@@ -276,8 +314,6 @@ theme.activateFilter = function ($el) {
 };
 
 theme.filterSearch = function (collection) {
-  // var color = $('li.color-filter.active').data('color');
-  // var size = $('li.size-filter.active').data('size');
   
   var color = theme.variables.currentColor;
   var size = theme.variables.currentSize;

@@ -23,22 +23,13 @@ REUBEN // Replaced the default index.liquid with a collection one so that we can
 
 <div class="grid grid-collage dm-grid">
 {% assign collection = collections.all-dresses %}
-{% if current_page == 1 %}
-	{% assign page_number = 8 %}
-{% else %}
-	{% assign page_number = 9 %}
-{% endif %}
+{% assign page_number = 9 %}
 
 	{% paginate collection.products by page_number %}
 
 	<div class="collection-matrix">
 	<!-- its working -->
 		{% comment %} if this is the first page {% endcomment %}
-		{% if current_page == 1 %}
-			<div class="grid__item dm_grid__item large--one-third medium--one-half small--one-whole">
-				{% include "left-aside-filter" %}
-			</div>
-		{% endif %}
 	
 		{% for product in collection.products %}
 		<div class="grid__item dm_grid__item large--one-third medium--one-half" id="product-{{ forloop.index | plus:paginate.current_offset }}">

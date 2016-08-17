@@ -354,10 +354,34 @@
           {% endfor %}
         </ul>
 
-        {% if template contains "collection" or template contains "index" %}
+        {% unless template contains "index" %}
 
           <div class="grid">
-            <div class="grid__item one-whole"><h1 class="dm-collection-title">{{ collection.title }}</h1></div>
+
+            <div class="grid__item one-whole">
+              <div class="grid">
+                <button class="js-filter-toggle grid__item small--one-quarter small--show medium--hide large--hide"> Filters </button>
+
+                <h1 class="dm-collection-title grid__item small--hide medium--show large--show small--one-half">
+                  {% if collection.title contains "Products" %}
+                    <h1 class="dm-collection-title grid__item small--one-half">
+                      All Dresses
+                    </h1>
+                  {% else %}
+                    <h1 class="dm-collection-title grid__item small--hide medium--show large--show one-whole">
+                      {{ collection.title | replace: '-', ' ' }}
+                    </h1>
+                    <h1 class="dm-collection-title grid__item small--show medium--hide large--hide small--one-half">
+                      {% if  collection.metafields.global['parent'] %}
+                        {{ collection.metafields.global['parent'] | replace: '-', ' ' }}
+                      {% else %}
+                        {{ collection.title}}
+                      {% endif %}
+                    </h1>
+                  {% endif %}
+                </h1>
+              </div>
+            </div>
 
             <div class="grid__item one-whole">
               {{ content_for_layout }}
@@ -366,7 +390,7 @@
 
         {% else %}
           {{ content_for_layout }}
-        {% endif %}
+        {% endunless %}
 
       </div>
     </main>

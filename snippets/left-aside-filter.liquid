@@ -16,8 +16,10 @@
     {% assign coll = collections[var] %}
 
     {% include 'sizes-colors-vendors' coll: coll %}
-    <ul class="left-aside-filters">
-      <h2> <b> Filter By: </b> </h2>
+  
+    
+    <ul class="left-aside-filters small-js-hidden">
+      <h2> <b> Filter By: </b></h2>  
       <li>
         <h2> Size: </h2>
         <ul class="size-filter">
@@ -31,8 +33,11 @@
           {% include "colors-in-collection" total_colors: total_colors %}
         </ul>
       </li>
+      <li>
+        <button class="btn"> Search </button>
+      </li>
     </ul>
-    <button class="btn"> Search </button>
+    
 </div>
 
 
@@ -40,7 +45,6 @@
 <script type="text/javascript">
 
     // expose liquid data to variablse
-    
     var color = "{{ current_color }}";
     var parent = "{{ var }}";
     var title = "{{ collection.title }}";
@@ -49,6 +53,6 @@
       theme.variables.currentColor = color;
       theme.variables.curCollectionTitle = title;
       theme.variables.parentCollection = parent;
-    })
+    });
 
 </script>
