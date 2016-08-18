@@ -8,6 +8,12 @@
 		{% assign current_color = color %}
 	{% endif %}
 
-	<li class="color-filter" data-color="{{ color }}"><span class="circle"><span class="cross"></span></span></li>
+	<li class="color-filter" data-color="{{ color }}">
+		<div class="middle">
+	        <div class="circle">
+	            <div class="circle center"></div>
+	        </div>
+		</div>
+    </li>
 	
 {% endfor %}
