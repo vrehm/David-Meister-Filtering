@@ -25,7 +25,7 @@
           {% include "sizes-in-collection" total_sizes: total_sizes %}
         </ul>
       </li>
-      <li>
+      <li class="color-filter--wrapper">
         {% comment %}for each color in collection{% endcomment %}
         <h2> Color: </h2>
         <ul class="color-filter">
@@ -44,15 +44,15 @@
 
 <script type="text/javascript">
 
-    // expose liquid data to variablse
-    var color = "{{ current_color }}";
-    var parent = "{{ var }}";
-    var title = "{{ collection.title }}";
+  // expose liquid data to variablse
+  var color = "{{ current_color }}";
+  var parent = "{{ var }}";
+  var title = "{{ collection.title }}";
 
-    $(document).ready(function(){
-      theme.variables.currentColor = color;
-      theme.variables.curCollectionTitle = title;
-      theme.variables.parentCollection = parent;
-    });
+  $(document).ready(function(){
+    theme.variables.currentColor = color;
+    theme.variables.curCollectionTitle = title;
+    theme.variables.parentCollection = parent;
+  });
 
 </script>
