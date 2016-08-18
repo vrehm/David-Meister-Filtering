@@ -284,9 +284,14 @@ theme.leftAsideFilter = function() {
   theme.activateFilter($colorFilter);
   theme.activateFilter($sizeFilter);
 
-  theme.cache.$leftAside.find('button').on('click', function(){
+  theme.cache.$leftAside.find('button.filter').on('click', function(){
     theme.filterSearch(theme.variables.parentCollection);
   })
+
+  theme.cache.$leftAside.find('button.clear').on('click', function(){
+    theme.filterClear(theme.variables.parentCollection);
+  })
+
 };
 
 theme.activateFilter = function ($el) {
@@ -312,6 +317,13 @@ theme.activateFilter = function ($el) {
     }
   });
 };
+
+theme.filterClear = function (collection) {
+  var parent = "/collections/"+collection.toLowerCase();
+  console.log(parent);
+  window.location.pathname = parent;
+}
+
 
 theme.filterSearch = function (collection) {
   
