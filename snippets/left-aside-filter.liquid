@@ -5,18 +5,17 @@
     
     {% assign family = collection.metafields.global %}
     
-     {% assign var = collection.title %}
+     {% assign var = collection.title | handle %}
 
     {% if family['parent'] %}
       {% assign var = family['parent'] %}
     {% elsif collection.title contains "Products" %}
-      {% assign var = "All-Dresses" %}  
-    {% endif %}
+      {% assign var = "All-Dresses" %}
+    {% endif %}    
 
     {% assign coll = collections[var] %}
-
+      
     {% include 'sizes-colors-vendors' coll: coll %}
-  
     
     <ul class="left-aside-filters small-js-hidden">
       <h2> <b> Filter By: </b></h2>  

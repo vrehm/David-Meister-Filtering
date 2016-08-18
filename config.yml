@@ -6,8 +6,15 @@ development:
   refill_rate: 2
   concurrency: 2
 staging:
+  password: 3434625f21557c969afb8921796b0ff0
+  theme_id: "43993733"
+  store: david-meister.myshopify.com
+  bucket_size: 40
+  refill_rate: 2
+test-staging:
   password: 43a2898a25cad17bdd470817a683c4ab
   theme_id: "120145729"
   store: david-meister-staging.myshopify.com
   bucket_size: 40
   refill_rate: 2
+  concurrency: 2
