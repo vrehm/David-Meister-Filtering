@@ -65,8 +65,8 @@
         {% comment %}
           If collection exists but is empty, display message
         {% endcomment %}
-        <div class="grid__item text-center">
-          <p>{{ 'collections.general.no_matches' | t }}</p>
+        <div class="grid__item one-half text-center">
+          <p style="float: left;">{{ 'collections.general.no_matches' | t }}</p>
         </div>
 
       {% endif %}
@@ -92,10 +92,9 @@
         {% include 'onboarding-empty-collection' %}
 
       {% else %}
+        
+      
 
-        {% comment %}
-          If collection exists but is empty, display message
-        {% endcomment %}
         <div class="grid__item text-center">
           <p>{{ 'collections.general.no_matches' | t }}</p>
         </div>
