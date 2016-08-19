@@ -34,11 +34,13 @@ theme.variables = {
   productPageLoad     : false,
   productPageSticky   : true,
 
-  // Size, Color, Colleciton for filter
+  // Size, Color, Type, Colleciton for filter
   currentSize         : '', 
   currentColor        : '',
+  currentType         : '', 
   parentCollection    : '',
   curCollectionTitle  : '',
+
 
   // Breakpoints from src/stylesheets/global/variables.scss.liquid
   mediaQuerySmall     : 'screen and (max-width: 590px)',
@@ -213,11 +215,14 @@ theme.leftAsideFilter = function() {
     return;
   };
 
+  var aside = theme.cache.$leftAside;
+
   var collectionTitle = theme.variables.curCollectionTitle,
       $sizeUl = $('ul.size-filter'),
       $colorUl = $('ul.color-filter'),
       $colorFilter = $sizeUl.find('.size-filter'),
       $sizeFilter = $colorUl.find('.color-filter'),
+      $typeFilter = aside.find('li.type-filter'),
       arrow = $('.menu-arrow'),
       list =  $('.left-aside-filters'),
       currentColor,
@@ -283,6 +288,7 @@ theme.leftAsideFilter = function() {
   // activate all the filters
   theme.activateFilter($colorFilter);
   theme.activateFilter($sizeFilter);
+  theme.activateFilter($typeFilter);
 
   theme.cache.$leftAside.find('button.filter').on('click', function(){
     theme.filterSearch(theme.variables.parentCollection);
@@ -306,6 +312,8 @@ theme.activateFilter = function ($el) {
         theme.variables.currentColor = '';
       }else if($this.data('size')){
         theme.variables.currentSize = '';
+      }else if($this.data('type')){
+        theme.variables.currentType = '';
       }
     }else{
       $el.removeClass('active') && $(this).addClass('active');
@@ -313,6 +321,8 @@ theme.activateFilter = function ($el) {
         theme.variables.currentColor = $this.data('color');
       }else if($this.data('size')){
         theme.variables.currentSize = $this.data('size');
+      } else if($this.data('type')){
+        theme.variables.currentType = $this.data('type');
       }
     }
   });
@@ -320,7 +330,6 @@ theme.activateFilter = function ($el) {
 
 theme.filterClear = function (collection) {
   var parent = "/collections/"+collection.toLowerCase();
-  console.log(parent);
   window.location.pathname = parent;
 }
 
@@ -329,6 +338,7 @@ theme.filterSearch = function (collection) {
   
   var color = theme.variables.currentColor;
   var size = theme.variables.currentSize;
+  var type = theme.variables.currentType;
 
   if(color && size){
     url = "/collections/"+collection+"-"+color+"-"+size;
@@ -339,6 +349,11 @@ theme.filterSearch = function (collection) {
   }else{
     url = window.location.pathname;
   }
+  // if tag take the url and add a slash to it
+  if(type){
+    url +=  "/"+type
+  }
+
   window.location.pathname = url.toLowerCase();
 };
 

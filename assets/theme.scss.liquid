@@ -2551,6 +2551,21 @@ h1.dm-collection-title{
   ul{
     list-style: none;
     margin-left: 0px;
+
+    li.type-filter{
+      width: 100%;
+      border: 1px solid black;
+      text-align: center;
+
+      &:hover{
+        background-color: $light-grey;
+        color: white;
+      }
+      &:active, &.active{
+        background-color: black;
+        color: white;
+      }
+    }
     
     &.color-filter{
       float: left;
@@ -2578,7 +2593,7 @@ h1.dm-collection-title{
       float: left;
     }
    
-    li.color-filter, li.size-filter {
+    li.color-filter, li.size-filter, li.type-filter {
       cursor: pointer;
     }
 

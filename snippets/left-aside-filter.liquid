@@ -18,7 +18,21 @@
     {% include 'sizes-colors-vendors' coll: coll %}
     
     <ul class="left-aside-filters small-js-hidden">
-      <h2> <b> Filter By: </b></h2>  
+      <h2> <b> Filter By: </b></h2>
+      <li>
+        <h2> Type:</h2>
+        <ul class="type-filter">
+          <li data-type="Cocktail" class="type-filter">
+            <span>Cocktail</span>
+          </li>
+          <li data-type="Gown" class="type-filter">
+            <span>Gown</span>
+          </li>
+          <li data-type="Day-to-evening" class="type-filter">
+            <span>Day to Evening</span>
+          </li>
+        </ul>
+      </li>  
       <li>
         <h2> Size: </h2>
         <ul class="size-filter">
@@ -37,7 +51,7 @@
         <button class="btn filter"> Search </button>
       </li>
     </ul>
-    
+  
 </div>
 
 
