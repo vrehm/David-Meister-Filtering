@@ -277,23 +277,28 @@ theme.leftAsideFilter = function() {
       });
     }
   }
+  // check to make sure that the window is not rezizing on IOS
+  var windowWidth = $(window).width();
 
   $(window).on('resize', function(){
     // if the filter list is visible hide it below 599
-    if($(window).width() > 590 ){
-      list.fadeIn( 500, function(){
-        list.removeClass('small-js-hidden');
-        arrow.removeClass('rotate');
-      });
-    }else{
-      list.fadeOut( 500, function(){
-        list.addClass('small-js-hidden');
-      });
-      // show the filter list
-      $('.js-filter-toggle').on('click', function(){ 
-        openFilter(list, arrow);
-      });
-    } 
+    if ($(window).width() != windowWidth) {
+      // if this is a mobile device trigger
+      if($(window).width() > 590 ){
+        list.fadeIn( 500, function(){
+          list.removeClass('small-js-hidden');
+          arrow.removeClass('rotate');
+        });
+      }else{
+        list.fadeOut( 500, function(){
+          list.addClass('small-js-hidden');
+        });
+        // bind this
+        $('.js-filter-toggle').on('click', function(){ 
+          openFilter(list, arrow);
+        });
+      } 
+    }
   }).resize(); // resize calls this on load
 
   // activate all the filters
@@ -303,11 +308,18 @@ theme.leftAsideFilter = function() {
   // filter button on click activate specific filter
   theme.cache.$leftAside.find('button.filter').on('click', function(){
     theme.filterSearch(theme.variables.parentCollection);
-  })
+  });
 
   theme.cache.$leftAside.find('button.clear').on('click', function(){
     theme.filterClear(theme.variables.parentCollection);
-  })
+  });
+
+  // on load bind mobile
+  if($(window).height() < 590){
+    $('.js-filter-toggle').on('click', function(){ 
+      openFilter(list, arrow);
+    });
+  }
 
 };
 
@@ -372,7 +384,6 @@ theme.sizeCartDrawerFooter = function () {
   if (!theme.cache.$drawerRight.hasClass('drawer--has-fixed-footer')) {
     return;
   }
-
   // Elements are reprinted regularly so selectors are not cached
   var $cartFooter = $('.ajaxcart__footer').removeAttr('style'),
       $cartInner = $('.ajaxcart__inner').removeAttr('style'),
