@@ -281,7 +281,7 @@ theme.leftAsideFilter = function() {
   var windowWidth = $(window).width();
 
   $(window).on('resize', function(){
-    // if the filter list is visible hide it below 599
+    // this prevents the menu from hiding when it's open on mobile
     if ($(window).width() != windowWidth) {
       // if this is a mobile device trigger
       if($(window).width() > 590 ){
@@ -315,7 +315,7 @@ theme.leftAsideFilter = function() {
   });
 
   // on load bind mobile
-  if($(window).height() < 590){
+  if($(window).width() < 590){
     $('.js-filter-toggle').on('click', function(){ 
       openFilter(list, arrow);
     });
